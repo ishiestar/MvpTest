@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion "android-$project.compileSdkVersion"
+    buildToolsVersion "$project.buildToolsVersion" //" 25.0.0 "
+    defaultConfig {
+        applicationId "com.example.mvptest"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        jackOptions.enabled true
+    }
+    buildTypes {
+        debug {
+            buildConfigField("String", "API_KEY", "\"$project.TWITTER_API_KEY\"")
+            buildConfigField("String", "API_SECRET", "\"$project.TWITTER_API_SECRET\"")
+            debuggable true;
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$project.supportLibraryVersion"
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:design:$project.supportLibraryVersion"
+    compile "com.squareup.okhttp3:okhttp:$project.okHttpVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
+    compile "oauth.signpost:signpost-core:$project.signPostVersion"
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+}
+
+task printHome<< {
+    print System.getenv('HOME')
+}
