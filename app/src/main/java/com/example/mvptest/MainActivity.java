@@ -14,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener<
     private static final String SCHEME = "app";
     public static final String CALLBACK_URL = SCHEME + "://x-auth-twitter";
 
+    RelativeLayout rootView;
     WebView webView;
     ProgressBar progressBar;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener<
         setContentView(R.layout.activity_main);
         loginProvider = new OauthLoginProvider(this);
 
+        rootView = (RelativeLayout) findViewById(R.id.activity_main);
         webView = (WebView) findViewById(R.id.logged_in_webview);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener<
 
     @Override
     public void onResponse(Object data) {
-        if(data instanceof String) {
+        if (data instanceof String) {
             //this means that it's just a URL, load it into the WV
             Toast.makeText(this, data.toString(), Toast.LENGTH_SHORT).show();
             webView.loadUrl(data.toString());
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener<
             //the user profile. TODO change this if emit can return other types later on
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = preferences.edit();
+            Log.v(LOG_TAG, data.toString());
             try {
                 editor.putString(Constants.KEY_TOKEN, ((JSONObject) data).getString(Constants.KEY_TOKEN));
                 editor.putString(Constants.KEY_SECRET, ((JSONObject) data).getString(Constants.KEY_SECRET));
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener<
     @Override
     public void onFailure(Throwable throwable) {
         //make a snackbar that asks the user to call the API again in case the earlier call fails
-        Snackbar.make(findViewById(R.id.activity_main), throwable.getMessage(), Snackbar.LENGTH_LONG)
+        Snackbar.make(rootView, throwable.getMessage(), Snackbar.LENGTH_LONG)
                 .setAction(android.R.string.ok, v -> loginProvider.execute(CALLBACK_URL, true));
     }
 }

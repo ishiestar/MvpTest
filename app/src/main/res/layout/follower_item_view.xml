@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/follower_profile_photo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/follower_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/follower_profile_photo"
+        android:text="Follower"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/follower_name"
+        android:layout_below="@id/follower_name"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/follower_profile_photo"
+        android:text="This is some text" />
+</RelativeLayout>

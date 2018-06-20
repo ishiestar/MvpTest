@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MvpTest</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Timeline</string>
+    <string name="title_dashboard">Profile</string>
+    <string name="title_notifications">Post Tweet</string>
 </resources>

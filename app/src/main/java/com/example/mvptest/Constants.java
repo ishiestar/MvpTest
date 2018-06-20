@@ -14,4 +14,5 @@ public class Constants {
     public static final String API_SECRET = "BRLm9cLliS9fJ9NLAiyxZhUiG2fHd5gInTsLIueoxD7Kpae9IU";
     public static final String KEY_TOKEN = "token";
     public static final String KEY_SECRET = "secret";
+    public static final String JSON_DATA = "json_data";
 }
